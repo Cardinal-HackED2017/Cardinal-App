@@ -10,6 +10,9 @@ var meetings = [
 	"id": "3"}
 ];
 
+var SIDEBAR_LIGHT_COLOUR = "#ff9999";
+var SIDEBAR_DARK_COLOUR = "#c41e3a";
+
 function MeetingsList(meetingsListID) {
 	this.id = meetingsListID;
 
@@ -20,8 +23,13 @@ function MeetingsList(meetingsListID) {
 			.enter()
 			.append('div')
 			.classed('meetingButton', true)
+			.attr("background-color", SIDEBAR_DARK_COLOUR)
 			.text(function(d) {
 				return d.name;
-			});
+			}).on('mouseover', function(){
+    			d3.select(this).style("background-color", SIDEBAR_LIGHT_COLOUR);
+			}).on('mouseout', function(){
+    			d3.select(this).style("background-color", SIDEBAR_DARK_COLOUR);
+			})
 	}
 }

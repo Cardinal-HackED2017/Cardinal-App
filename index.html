@@ -1,20 +1,21 @@
 <!doctype html>
 <html>
     <head>
-      <link rel="stylesheet" type="text/css" href="styles/index.css" />
-      <link rel="stylesheet" type="text/css" href="node_modules/leaflet/dist/leaflet.css" />
-      <style>
-
-      </style>
+        <link rel="stylesheet" type="text/css" href="styles/index.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/leaflet/dist/leaflet.css" />
     </head>
     <body>
         <div id="sidebar">
-          <div id="meetingButtons">
-          </div>
+            <h1 class="sidebarTitle">My Meetings</h1>
+            <div id="meetingButtons">
+            </div>
+            <div id="meetingMgmtButtons">
+                <div id="meetingAddButton" class="meetingMgmtButton">Create a Meeting</div>
+                <div id="meetingInviteButton" class="meetingMgmtButton">Meeting Invitations</div>
+            </div>
         </div>
         <div id="map"></div>
-        <div id="chat">
-        </div>
+        <div id="chat"></div>
     </body>
 
     <script src="node_modules/d3/build/d3.js"></script>
