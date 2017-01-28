@@ -1,0 +1,24 @@
+{
+  "name": "cardinal-app",
+  "version": "1.0.0",
+  "description": "Find where and when to meet up",
+  "main": "js/main.js",
+  "dependencies": {
+    "d3": "^4.4.4",
+    "leaflet": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cardinal-HackED2017/Cardinal-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cardinal-HackED2017/Cardinal-App/issues"
+  },
+  "homepage": "https://github.com/Cardinal-HackED2017/Cardinal-App#readme"
+}

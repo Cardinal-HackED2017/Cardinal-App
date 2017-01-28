@@ -7,5 +7,12 @@ html, body {
     position: absolute;
     width: 30%;
     height: 100%;
-    background-color: black;
+    background-color: #c41e3a;
+}
+
+#map {
+    position: absolute;
+    left: 30%;
+    width: 70%;
+    height: 100%;
 }
