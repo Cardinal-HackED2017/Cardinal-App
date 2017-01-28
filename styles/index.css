@@ -8,10 +8,6 @@ html, body {
     width: 30%;
     height: 100%;
     background-color: #c41e3a;
-
-    display: flex;
-    align-items: center; /*vertical center*/
-    justify-content: center; /*horizontal center*/
 }
 
 #map {
@@ -21,14 +17,15 @@ html, body {
     height: 100%;
 }
 
-.meeting-button {
+.meetingButton {
+    display: flex;
 	height: 70px;
-    width: 200px;
-    margin: 10px;
-    border:5px solid #ff9999;
+    width: 80%;
+    margin: 5px auto;
+    border:2px solid #ff9999;
     background-color: #c41e3a;
     border-radius: 8px;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
 }
