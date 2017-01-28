@@ -1,0 +1,11 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#sidebar {
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background-color: black;
+}
