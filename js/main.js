@@ -1,7 +1,7 @@
 window.onload = function() {
     views = [
         new MainMap('map'),
-        new MeetingsList('meetingList')
+        new Sidebar('#sidebar')
     ];
 
     views.forEach(function(view) {

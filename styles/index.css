@@ -10,6 +10,16 @@ html, body {
     background-color: #c41e3a;
 }
 
+.sidebarContext {
+    width: 100%;
+    height: 80%
+}
+
+.sidebarMgmtButtons {
+    width: 100%;
+    height: 20%
+}
+
 #map {
     position: absolute;
     left: 30%;

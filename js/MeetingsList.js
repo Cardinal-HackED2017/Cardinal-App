@@ -10,11 +10,11 @@ var meetings = [
 	"id": "3"}
 ];
 
-function MeetingsList(meetingsListID) {
+function MeetingsList(sidebar, meetingsListID) {
 	this.id = meetingsListID;
 
 	this.load = function() {
-		d3.select('#meetingButtons')
+		d3.select(this.id)
 			.selectAll('.meetingButton')
 			.data(meetings)
 			.enter()
@@ -22,6 +22,8 @@ function MeetingsList(meetingsListID) {
 			.classed('meetingButton', true)
 			.text(function(d) {
 				return d.name;
+			}).on('click', function(d) {
+				sidebar.showMeeting(d);
 			});
 	}
 }
