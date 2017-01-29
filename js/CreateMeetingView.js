@@ -81,7 +81,9 @@ function CreateMeetingView(sidebar, createMeetingViewID, mainMap) {
             .text("Meetup length (min) ")
             .append("input")
             .attr("id","meetingLength")
-            .attr("type", "number");
+            .attr("type", "number")
+            .attr("value", "30")
+            .attr("min", "5");
 
         d3.select(".createForm")
             .append("p")
