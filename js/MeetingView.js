@@ -39,6 +39,8 @@ function MeetingView(sidebar, divID, meeting) {
 
     this.load = function() {
 
+        console.log(meeting.suggestedTimes);
+
         d3.select(this.id)
             .append("h1")
             .classed("meetingInfoTitle", true)
@@ -103,7 +105,7 @@ function MeetingView(sidebar, divID, meeting) {
         times.append('div')
             .classed('sectionContents', true)
             .selectAll('div.meetingTime')
-            .data(meeting.suggestedTimes)
+            .data(meeting.suggestedTimes.slice(0, 3))
             .enter()
             .append('div')
             .classed('meetingTime', true)
@@ -149,7 +151,7 @@ function MeetingView(sidebar, divID, meeting) {
 
         var times = d3.select('.meetingContent')
             .selectAll('div.meetingTime')
-            .data(meeting.suggestedTimes);
+            .data(meeting.suggestedTimes.slice(0, 3));
 
         times.enter()
             .append('div')
