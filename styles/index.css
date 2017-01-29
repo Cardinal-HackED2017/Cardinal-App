@@ -198,6 +198,7 @@ textarea {
     left:0px;
     bottom:0px;
     background-color : #ca5656;
+    overflow-y: auto;
 }
 
 #previousMessages {
@@ -223,17 +224,24 @@ textarea {
 #newMessage {
     border-radius: 8px;
     height: 100%;
-    width: 80%;
+    width: 85%;
     background-color: white;
     color: black;
-    float: left;
     font-size: 14px;
 }
 
 #sendMessage {
     width: 12%;
-    padding: 8px;
-    font-size: 10px;
-    text-align: center;
-    float: right;
+    height: 100%;
+    font-size: 12px;
+    margin-left: 0.6%;
+
+    border:2px solid #ff9999;
+    border-radius: 4px;
+    color: white;
+    background-color: #a81919;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -13,7 +13,6 @@ function MeetingView(sidebar, divID, meeting) {
     var meetingView = this;
 
     this.updateMessages = function(messages) {
-        console.log(messages);
         var messageBox = d3.select('#previousMessages')
             .selectAll('div.message')
             .data(messages);
@@ -127,7 +126,7 @@ function MeetingView(sidebar, divID, meeting) {
 
         newMessage.append("div")
             .classed("submitButton", true)
-            .text('Send')
+            .text('SEND')
             .attr('id','sendMessage')
             .on('click', this.sendChatMessage);
 

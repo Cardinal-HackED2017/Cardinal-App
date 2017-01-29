@@ -70,8 +70,6 @@ function sendUserInfo() {
             authUser.getBasicProfile().getName() +
             '", "email": "' + authEmail + '"}';
 
-    console.log(authUser.getAuthResponse().access_token);
-
     d3.request("http://" + hostandport + "/users/")
         .header('Content-Type', 'application/json')
         .header("Authorization", authToken)
