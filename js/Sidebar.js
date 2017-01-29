@@ -1,5 +1,6 @@
 function Sidebar(sidebarID) {
     this.id = sidebarID;
+    this.context = this.id + ' .sidebarContext';
     this.list = null;
     this.meeting = null;
 
@@ -11,17 +12,17 @@ function Sidebar(sidebarID) {
             .append('div')
             .classed('sidebarMgmtButtons', true);
 
-        this.list = new MeetingsList(this, this.id + ' .sidebarContext');
+        this.list = new MeetingsList(this, this.context);
         this.list.load();
     }
 
     this.clearContext = function() {
-        d3.select(this.id + ' .sidebarContext').selectAll('*').remove();
+        d3.select(this.context).selectAll('*').remove();
     }
 
     this.showMeeting = function(meeting) {
         this.clearContext();
-        this.meeting = new MeetingView();
+        this.meeting = new MeetingView(this, this.context, meeting);
         this.meeting.load();
     }
 }

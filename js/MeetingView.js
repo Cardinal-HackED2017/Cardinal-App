@@ -1,4 +1,4 @@
-function MeetingView(divID, meeting) {
+function MeetingView(sidebar, divID, meeting) {
 
     this.meeting = meeting;
 
