@@ -29,29 +29,34 @@ html, body {
 
 .meetingButton {
     display: flex;
-	height: 70px;
+    height: 70px;
     width: 80%;
     margin: 5px auto;
     border:2px solid #ff9999;
     border-radius: 8px;
     align-items: center;
     justify-content: center;
+    background-color: #c41e3a;
+}
+
+.meetingButton:hover {
+    background-color:#ff9999;
 }
 
 .meetingsListTitle {
-	text-align: center;
+    text-align: center;
 }
 
 .sidebarMgmtButtons {
-	display: flex;
-	background-color: #888888;
-	align-items: center;
+    display: flex;
+    background-color: #888888;
+    align-items: center;
     justify-content: center;
 }
 
-.meetingMgmtButton {
+.sidebarMgmtButton {
     display: inline-flex;
-	height: 70px;
+    height: 70px;
     width: 38%;
     margin: 5px auto;
     border:2px solid #ff9999;
@@ -59,4 +64,9 @@ html, body {
     align-items: center;
     justify-content: center;
     margin: 1%;
+    background-color: #c41e3a;
+}
+
+.sidebarMgmtButton:hover {
+    background-color: #ff9999;
 }
