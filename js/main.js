@@ -1,5 +1,4 @@
 var socket;
-var hostandport = "104.236.145.62:8080"
 
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
@@ -36,7 +35,7 @@ function handleClientLoad() {
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token);
+      authToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
     } else {
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
@@ -70,13 +69,13 @@ window.onload = function() {
         view.load();
     });
 
-    // d3.request(hostandport + "/meetings/")
-    //     .mimeType("application/json")
-    //     .header("Authorization", "some_token")
-    //     .response(function(xhr) { return JSON.parse(xhr.responseText); })
-    //     .get(function(data) {
-    //
-    //     });
+    d3.request("http://" + hostandport + "/users/")
+        .mimeType("application/json")
+        .header("Authorization", authToken)
+        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+        .get(function(data) {
+            console.log(data);
+        });
 
     // doConnect();
 
