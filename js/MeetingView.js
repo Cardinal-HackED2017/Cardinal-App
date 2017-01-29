@@ -6,8 +6,6 @@ function MeetingView(sidebar, divID, meeting) {
     this.id = divID;
 
     this.load = function() {
-        console.log(meeting);
-
         meeting.times = [1, 2, 3];
 
         d3.select(this.id)
@@ -73,7 +71,7 @@ function MeetingView(sidebar, divID, meeting) {
 
         times.append('div')
             .classed('sectionContents', true)
-            .selectAll('div.time')
+            .selectAll('div.meetingTime')
             .data(meeting.times)
             .enter()
             .append('div')
@@ -99,7 +97,44 @@ function MeetingView(sidebar, divID, meeting) {
 
         messageBox.append("div")
             .classed("submitButton", true)
-            .text('Submit')
+            .text('Send')
             .attr('id','sendMessage');
+    }
+
+    this.update = function() {
+        var participants = d3.selectAll('div.participant')
+            .data(meeting.participants);
+
+        participants.enter()
+            .append('div')
+            .classed('participant', true)
+            .text(function(d) { return d; });
+
+        participants.text(function(d) { return d; });
+        participants.exit().remove();
+
+        var times = d3.select('.meetingContent')
+            .selectAll('div.meetingTime')
+            .data(meeting.times);
+
+        times.enter()
+            .append('div')
+            .classed('meetingTime', true)
+            .text(function(d) { return d; });
+
+        times.text(function(d) { return d; });
+        times.exit().remove();
+
+        var messageBox = d3.select(this.id)
+            .selectAll('div.message')
+            .data(messages);
+
+        messageBox.enter()
+            .append('div')
+            .classed('message', true)
+            .text(function(d) { return d; });
+
+        messageBox.text(function(d) { return d; });
+
     }
 }

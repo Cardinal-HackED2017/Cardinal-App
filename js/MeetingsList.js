@@ -34,6 +34,7 @@ function MeetingsList(sidebar, meetingsListID, mainMap) {
 			.text(function(d) {
 				return d.name;
 			}).on('click', function(d) {
+				mainMap.zoomTo(d.location);
 				sidebar.showMeeting(d);
 			});
 
