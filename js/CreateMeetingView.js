@@ -155,7 +155,7 @@ function CreateMeetingView(sidebar, createMeetingViewID, mainMap) {
             '", "dayEnd": "' + d3.select('#endTime').node().value +
             '", "Length": "' + getTimeSpan(parseFloat(d3.select('#meetingLength').node().value)) +
             '", "Longitude": "' + latLng.lng +
-            '", "Longitude": "' + latLng.lat +
+            '", "Latitude": "' + latLng.lat +
             '", "InviteEmails": "' + d3.select('#inviteEmails').node().value + '"}';
 
         d3.request("http://" + hostandport + "/meetings/")

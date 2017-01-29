@@ -20,6 +20,32 @@ function ViewInvitesView(sidebar, viewInvitesViewID) {
 
     this.id = viewInvitesViewID;
 
+    var inviteList = this;
+
+    this.getInvitations = function() {
+		d3.request("http://" + hostandport + "/invitations/")
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .get(function(error, data) {
+				if (error) { console.log(error); }
+	    		else { inviteList.update(data) }
+	        });
+	}
+
+    this.acceptInvitation = function(inv) {
+        d3.request("http://" + hostandport + "/invitations/" + inv.invitationId)
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .post(function(error) {
+				if (error) { console.log(error); }
+                else { sidebar.clear(); sidebar.load(); }
+	        });
+    }
+
     this.load = function() {
         d3.select(this.id)
             .append("h1")
@@ -36,24 +62,31 @@ function ViewInvitesView(sidebar, viewInvitesViewID) {
                 sidebar.load();
             });
 
-        d3.select(this.id)
+        this.getInvitations();
+    }
+
+    this.update = function(invs) {
+        if (invs == null) {
+            return;
+        }
+
+        var invSelection = d3.select(this.id)
             .append("div")
             .classed("invitesList", true)
             .selectAll('.inviteItem')
-            .data(invMeetings)
-            .enter()
+            .data(invs);
+
+        invSelection.enter()
             .append('div')
             .classed('inviteItem', true)
             .append("p")
             .text(function(d) {
-                return d.name
+                console.log(d);
+                return d.meetingName;
             }).append("p")
-            .text(function(d) {
-                return d.description
-            }).append("p")
-            .append("input")
-            .attr("type", "submit")
-            .attr("value", "Check schedule")
-            .classed("submitButton", true);
-        }
+            .append("div")
+            .text("Join meetup")
+            .classed("submitButton", true)
+            .on('click', this.acceptInvitation);
+    }
 }

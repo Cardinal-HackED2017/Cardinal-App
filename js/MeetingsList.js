@@ -56,7 +56,7 @@ function MeetingsList(sidebar, meetingsListID, mainMap) {
 
 		meetings.forEach(function(meeting) {
 			new L.marker(
-				L.LatLng(meeting.location.latitude, meeting.location.longitude),
+				new L.LatLng(meeting.location.latitude, meeting.location.longitude),
 				{marker: true}
 			).addTo(mainMap.map);
 		});
