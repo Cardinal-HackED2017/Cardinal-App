@@ -38,7 +38,6 @@ function MeetingView(sidebar, divID, meeting) {
     }
 
     this.load = function() {
-        meeting.times = [1, 2, 3];
 
         d3.select(this.id)
             .append("h1")
@@ -104,11 +103,11 @@ function MeetingView(sidebar, divID, meeting) {
         times.append('div')
             .classed('sectionContents', true)
             .selectAll('div.meetingTime')
-            .data(meeting.times)
+            .data(meeting.suggestedTimes)
             .enter()
             .append('div')
             .classed('meetingTime', true)
-            .text(function(d) { return d; });
+            .text(function(d) { return d.startTime; });
 
         var messageBox = d3.select(this.id)
             .append("div")
@@ -150,14 +149,14 @@ function MeetingView(sidebar, divID, meeting) {
 
         var times = d3.select('.meetingContent')
             .selectAll('div.meetingTime')
-            .data(meeting.times);
+            .data(meeting.suggestedTimes);
 
         times.enter()
             .append('div')
             .classed('meetingTime', true)
-            .text(function(d) { return d; });
+            .text(function(d) { return d.startTime; });
 
-        times.text(function(d) { return d; });
+        times.text(function(d) { return d.startTime; });
         times.exit().remove();
 
     }
