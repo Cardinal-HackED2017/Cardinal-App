@@ -11,7 +11,7 @@ function SidebarMgmtButtons(sidebar, sidebarMgmtButtonsID) {
 			.text(function() {
 				return "Create a Meeting";
 			}).on('click', function() {
-				// TODO
+				sidebar.createMeeting();
 			});
 		d3.select(this.id)
 			.append('div')

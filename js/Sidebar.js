@@ -9,7 +9,7 @@ function Sidebar(sidebarID) {
             .append('div')
             .classed('sidebarContext', true)
             .append('h1')
-            .classed('meetingsListTitle', true)
+            .classed('meetingInfoTitle', true)
             .text("My Meetings");
         d3.select(this.id)
             .append('div')
@@ -30,5 +30,11 @@ function Sidebar(sidebarID) {
         this.clearContext();
         this.meeting = new MeetingView();
         this.meeting.load();
+    }
+
+    this.createMeeting = function() {
+        this.clearContext();
+        this.newMeeting = new CreateMeetingView(this, this.id + ' .sidebarContext');
+        this.newMeeting.load();
     }
 }
