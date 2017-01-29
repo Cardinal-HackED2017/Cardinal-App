@@ -5,7 +5,6 @@ function Sidebar(sidebarID) {
     this.mgmt = null;
 
     this.load = function() {
-        // make a title
         d3.select(this.id)
             .append('div')
             .classed('sidebarContext', true)
@@ -15,8 +14,6 @@ function Sidebar(sidebarID) {
         d3.select(this.id)
             .append('div')
             .classed('sidebarMgmtButtons', true);
-
-        // make the management button object
 
         this.list = new MeetingsList(this, this.id + ' .sidebarContext');
         this.list.load();
