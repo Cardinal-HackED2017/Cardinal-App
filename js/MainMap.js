@@ -18,4 +18,8 @@ function MainMap(mainMapID) {
             callback(marker);
         });
     };
+
+    this.zoomTo = function(location) {
+        this.map.setView(new L.LatLng(location.latitude, location.longitude), 12, { animation: true });
+    }
 }
