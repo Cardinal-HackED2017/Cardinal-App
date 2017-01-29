@@ -12,9 +12,8 @@ function CreateMeetingView(sidebar, createMeetingViewID, mainMap) {
         d3.select(this.id)
             .append("div")
             .classed("backIconContainer", true)
-            .append("img")
-            .attr("src","../images/back_icon.png")
-            .classed("backIcon", true)
+            .append('i')
+            .classed('fa fa-chevron-left aria-hidden backIcon', true)
             .on('click', function() {
                 sidebar.clear();
                 sidebar.load();

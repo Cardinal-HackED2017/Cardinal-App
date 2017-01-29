@@ -16,9 +16,8 @@ function MeetingView(sidebar, divID, meeting) {
         d3.select(this.id)
             .append("div")
             .classed("backIconContainer", true)
-            .append("img")
-            .attr("src","../images/back_icon.png")
-            .classed("backIcon", true)
+            .append('i')
+            .classed('fa fa-chevron-left aria-hidden backIcon', true)
             .on('click', function() {
                 sidebar.clear();
                 sidebar.load();
@@ -46,6 +45,20 @@ function MeetingView(sidebar, divID, meeting) {
             .classed('participant', true)
             .text(function(d) { return d; });
 
+        var description = d3.select('.meetingContent')
+            .append('div')
+            .classed('meetingSection', true);
+
+        description.append('div')
+            .classed('sectionIdentifier', true)
+            .append('i')
+            .classed('fa fa-info aria-hidden', true);
+
+        description.append('div')
+            .classed('sectionContents', true)
+            .append('div')
+            .classed('description', true)
+            .text(meeting.description);
 
         var times = d3.select('.meetingContent')
             .append('div')
