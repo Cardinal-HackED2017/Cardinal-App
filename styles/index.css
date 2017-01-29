@@ -18,6 +18,7 @@ html, body {
 }
 
 .backIconContainer {
+    float: left;
     width: 15%;
     height: 100%;
     display: inline-flex;
@@ -45,8 +46,8 @@ html, body {
 .meetingButton {
     display: flex;
     height: 70px;
-    width: 100%;
-    margin: -0.5px 0;
+    width: 60%;
+    margin: -0.5px auto;
     border-top:1px solid #ff9999;
     border-bottom:1px solid #ff9999;
     background-color: #a81919;
@@ -94,7 +95,7 @@ html, body {
 .meetingSection {
     display: flex;
     width: calc(100% - 80px);
-    margin: 20px;
+    margin: 20px 20px 20px 0;
     padding: 20px;
     border-radius: 10px;
     background-color: #ca5656;
@@ -132,9 +133,9 @@ textarea {
     height: 200px;
 }
 
-.invitesList {
+.invitesList, .meetingContent {
     width: 80%;
-    float: right;
+    float: left;
 }
 
 .inviteItem {
@@ -143,6 +144,7 @@ textarea {
     margin: -0.5px 0;
     border-top:1px solid #ff9999;
     border-bottom:1px solid #ff9999;
+    background-color: #a81919;
     align-items: center;
     justify-content: center;
 }

@@ -38,6 +38,7 @@ function Sidebar(sidebarID) {
 
     this.showMeeting = function(meeting) {
         this.clearContext();
+        this.removeMenu();
         this.meeting = new MeetingView(this, this.context, meeting);
         this.meeting.load();
     }
