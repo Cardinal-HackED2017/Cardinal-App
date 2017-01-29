@@ -1,6 +1,7 @@
 function Sidebar(sidebarID) {
     this.id = sidebarID;
     this.context = this.id + ' .sidebarContext';
+    this.menu = this.id + ' .sidebarMgmtButtons';
     this.list = null;
     this.meeting = null;
     this.mgmt = null;
@@ -23,8 +24,16 @@ function Sidebar(sidebarID) {
         this.mgmt.load();
     }
 
+    this.clear = function() {
+        d3.select(this.id).selectAll('*').remove();
+    }
+
     this.clearContext = function() {
         d3.select(this.context).selectAll('*').remove();
+    }
+
+    this.removeMenu = function() {
+        d3.select(this.menu).selectAll('*').remove();
     }
 
     this.showMeeting = function(meeting) {
@@ -35,6 +44,7 @@ function Sidebar(sidebarID) {
 
     this.createMeeting = function() {
         this.clearContext();
+        this.removeMenu();
         this.newMeeting = new CreateMeetingView(this, this.id + ' .sidebarContext');
         this.newMeeting.load();
     }
