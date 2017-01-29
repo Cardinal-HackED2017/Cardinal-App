@@ -1,3 +1,5 @@
+var messages = ["this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf"];
+
 function MeetingView(sidebar, divID, meeting) {
 
     this.meeting = meeting;
@@ -78,5 +80,26 @@ function MeetingView(sidebar, divID, meeting) {
             .classed('meetingTime', true)
             .text(function(d) { return d; });
 
+        var messageBox = d3.select(this.id)
+            .append("div")
+            .classed("peek", true);
+
+        messageBox.append('div')
+            .classed('previousMessages', true)
+            .selectAll('div.message')
+            .data(messages)
+            .enter()
+            .append('div')
+            .classed('message', true)
+            .text(function(d) { return d; });
+
+        messageBox.append('input')
+            .attr("id","newMessage")
+            .attr("type", "text");
+
+        messageBox.append("div")
+            .classed("submitButton", true)
+            .text('Submit')
+            .attr('id','sendMessage');
     }
 }
