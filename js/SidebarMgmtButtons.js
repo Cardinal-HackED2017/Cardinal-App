@@ -19,7 +19,7 @@ function SidebarMgmtButtons(sidebar, sidebarMgmtButtonsID) {
 			.text(function() {
 				return "View Invitations";
 			}).on('click', function() {
-				// TODO
+				sidebar.viewInvites();
 			});
 	}
 }

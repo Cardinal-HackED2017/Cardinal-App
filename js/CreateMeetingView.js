@@ -26,6 +26,13 @@ function CreateMeetingView(sidebar, createMeetingViewID) {
 
         d3.select("form")
             .append("p")
+            .text("Meeting name ")
+            .append("input")
+            .attr("id","meetingName")
+            .attr("type", "text");
+
+        d3.select("form")
+            .append("p")
             .text("Meeting description");
 
         d3.select("form")
@@ -84,6 +91,6 @@ function CreateMeetingView(sidebar, createMeetingViewID) {
         d3.select("form")
             .append("input")
             .attr("type", "submit")
-            .classed("submitButton");
+            .classed("submitButton", true);
     }
 }

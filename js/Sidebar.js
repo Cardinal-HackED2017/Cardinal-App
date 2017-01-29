@@ -48,4 +48,11 @@ function Sidebar(sidebarID) {
         this.newMeeting = new CreateMeetingView(this, this.id + ' .sidebarContext');
         this.newMeeting.load();
     }
+
+    this.viewInvites = function() {
+        this.clearContext();
+        this.removeMenu();
+        this.newMeeting = new ViewInvitesView(this, this.id + ' .sidebarContext');
+        this.newMeeting.load();
+    }
 }

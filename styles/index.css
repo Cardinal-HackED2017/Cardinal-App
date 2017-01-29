@@ -108,3 +108,34 @@ textarea {
 .emailInputs {
     height: 200px;
 }
+
+.invitesList {
+    width: 80%;
+    float: right;
+}
+
+.inviteItem {
+    display: flex;
+    width: 80%;
+    margin: -0.5px 0;
+    border-top:1px solid #ff9999;
+    border-bottom:1px solid #ff9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitButton {
+    display: inline-flex;
+    padding: 10px 10px;
+    border:2px solid #ff9999;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #a81919;
+}
+
+.submitButton:hover {
+    background-color: #ffc9c9;
+    color: black;
+}
