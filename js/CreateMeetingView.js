@@ -165,6 +165,20 @@ function CreateMeetingView(sidebar, createMeetingViewID, mainMap) {
 	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
 	        .post(sendJSON, function(error, data) {
 				if (error) { console.log(error); }
+                else { sidebar.clear(); sidebar.load(); sendMeetingInvites(data['meetingId']) }
+	        });
+    }
+
+    function sendMeetingInvites(meetingId) {
+        var sendJson = '{ meetingId: "' + meetingId  + '", invitations: [' + d3.select('#inviteEmails').node().value  + '] }'
+
+        d3.request("http://" + hostandport + "/invitations/")
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .post(sendJSON, function(error, data) {
+				if (error) { console.log(error); }
                 else { sidebar.clear(); sidebar.load(); }
 	        });
     }
