@@ -36,6 +36,7 @@ function handleClientLoad() {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
       authToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+      authEmail = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
     } else {
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
@@ -72,6 +73,8 @@ window.onload = function() {
     d3.request("http://" + hostandport + "/users/")
         .mimeType("application/json")
         .header("Authorization", authToken)
+        .header("E-mail", authEmail) // heheheheheheh
+        .header("P-assword", "hunter2")
         .response(function(xhr) { return JSON.parse(xhr.responseText); })
         .get(function(data) {
             console.log(data);
