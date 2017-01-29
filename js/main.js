@@ -1,4 +1,3 @@
-var socket;
 var authToken = null;
 var authEmail = null;
 var ready = false;
@@ -100,18 +99,5 @@ function load() {
         view.load();
     });
 
-    // doConnect();
+    doConnect();
 };
-
-function send_message(message) {
-    socket.send(message)
-}
-
-function process(s) {
-
-}
-
-function doConnect() {
-    socket = new WebSocket(hostandport);
-    socket.onmessage = process;
-}

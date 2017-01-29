@@ -200,13 +200,13 @@ textarea {
     background-color : #ca5656;
 }
 
-.previousMessages {
+#previousMessages {
     padding: 20px 10px 10px 10px;
     border-radius: 8px;
     height: 66%;
     background-color: white;
     color: black;
-    overflow-y: auto; 
+    overflow-y: auto;
     margin: 7px;
 }
 

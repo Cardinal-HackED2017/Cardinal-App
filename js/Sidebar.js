@@ -33,7 +33,7 @@ function Sidebar(sidebarID, mainMap) {
     }
 
     this.removeMenu = function() {
-        d3.select(this.menu).selectAll('*').remove();
+        d3.select(this.menu).remove();
     }
 
     this.showMeeting = function(meeting) {

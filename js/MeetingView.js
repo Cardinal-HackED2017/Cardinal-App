@@ -1,14 +1,42 @@
-var messages = ["this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
-"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
-"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
-"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
-"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
-"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf"];
+// var messages = ["this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+// "this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+// "this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+// "this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+// "this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+// "this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf"];
 
 function MeetingView(sidebar, divID, meeting) {
 
     this.meeting = meeting;
     this.id = divID;
+
+    var meetingView = this;
+
+    this.updateMessages = function(messages) {
+        console.log(messages);
+        var messageBox = d3.select('#previousMessages')
+            .selectAll('div.message')
+            .data(messages);
+
+        messageBox.enter()
+            .append('div')
+            .classed('message', true)
+            .text(function(d) { return d.content; });
+
+        messageBox.text(function(d) { return d.content; });
+    }
+
+    this.getMessages = function() {
+        d3.request("http://" + hostandport + "/meetings/" + meeting.id + "/messages")
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .get(function(error, data) {
+				if (error) { console.log(error); }
+                else { meetingView.updateMessages(data); }
+	        });
+    }
 
     this.load = function() {
         meeting.times = [1, 2, 3];
@@ -88,14 +116,7 @@ function MeetingView(sidebar, divID, meeting) {
             .classed("peek", true);
 
         messageBox.append('div')
-            .classed('previousMessages', true)
-            .attr('id', 'previousMessages')
-            .selectAll('div.message')
-            .data(messages)
-            .enter()
-            .append('div')
-            .classed('message', true)
-            .text(function(d) { return d; });
+            .attr('id', 'previousMessages');
 
         var newMessage = messageBox.append('div')
             .classed("newMessage", true);
@@ -107,10 +128,13 @@ function MeetingView(sidebar, divID, meeting) {
         newMessage.append("div")
             .classed("submitButton", true)
             .text('Send')
-            .attr('id','sendMessage');
+            .attr('id','sendMessage')
+            .on('click', this.sendChatMessage);
 
         var msgsDiv = document.getElementById("previousMessages");
             msgsDiv.scrollTop = msgsDiv.scrollHeight;
+
+        this.getMessages();
     }
 
     this.update = function() {
@@ -137,16 +161,17 @@ function MeetingView(sidebar, divID, meeting) {
         times.text(function(d) { return d; });
         times.exit().remove();
 
-        var messageBox = d3.select(this.id)
-            .selectAll('div.message')
-            .data(messages);
+    }
 
-        messageBox.enter()
-            .append('div')
-            .classed('message', true)
-            .text(function(d) { return d; });
-
-        messageBox.text(function(d) { return d; });
-
+    this.sendChatMessage = function() {
+        d3.request("http://" + hostandport + "/meetings/" + meeting.id + "/messages")
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .post('{"content": "' + d3.select('#newMessage').node().value + '"}', function(error) {
+				if (error) { console.log(error); }
+                d3.select('#newMessage').node().value = ""; meetingView.getMessages();
+	        });
     }
 }
