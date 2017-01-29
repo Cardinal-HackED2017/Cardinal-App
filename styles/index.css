@@ -76,3 +76,26 @@ html, body {
     border-color: #75000f;
     color: black;
 }
+
+.meetingSection {
+    display: flex;
+    width: calc(100% - 80px);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ca5656;
+}
+
+.meetingSection i {
+    font-size: 3em;
+    color: #a81919;
+}
+
+.sectionIdentifier {
+    width: 20%;
+}
+
+.sectionContents {
+    width: 80%;
+    font-size: 1.5em;
+}
