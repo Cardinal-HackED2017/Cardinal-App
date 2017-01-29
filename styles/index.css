@@ -27,6 +27,7 @@ html, body {
 }
 
 .backIconContainer {
+    cursor: pointer;
     float: left;
     width: 10%;
     height: 100%;
@@ -53,6 +54,7 @@ html, body {
 }
 
 .meetingButton {
+    cursor: pointer;
     display: flex;
     height: 70px;
     width: 60%;
@@ -83,6 +85,7 @@ html, body {
 }
 
 .sidebarMgmtButton {
+    cursor: pointer;
     display: inline-flex;
     height: 70px;
     width: 38%;
@@ -168,6 +171,7 @@ textarea {
 }
 
 .submitButton {
+    cursor: pointer;
     display: inline-block;
     padding: 10px 10px;
     border:2px solid #ff9999;
