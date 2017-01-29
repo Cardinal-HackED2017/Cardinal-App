@@ -8,7 +8,7 @@ html, body {
     width: 30%;
     height: 100%;
     background-color: #aa2929;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: "Raleway", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     color: white;
 }
 
@@ -49,6 +49,7 @@ html, body {
 .meetingsListTitle {
     text-align: center;
     color: black;
+    font-size: 40px;
 }
 
 .sidebarMgmtButtons {
