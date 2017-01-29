@@ -107,8 +107,7 @@ function MeetingView(sidebar, divID, meeting) {
             .attr("type", "text");
 
         newMessage.append("div")
-            .classed("submitButton", true)
-            .text('Submit')
+            .text('SEND')
             .attr('id','sendMessage');
 
         var msgsDiv = document.getElementById("previousMessages");
