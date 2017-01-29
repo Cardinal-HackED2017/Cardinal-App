@@ -7,7 +7,9 @@ html, body {
     position: absolute;
     width: 30%;
     height: 100%;
-    background-color: #c41e3a;
+    background-color: #aa2929;
+    font-family: "Raleway", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: white;
 }
 
 .sidebarContext {
@@ -29,13 +31,48 @@ html, body {
 
 .meetingButton {
     display: flex;
-	height: 70px;
-    width: 80%;
-    margin: 5px auto;
-    border:2px solid #ff9999;
-    background-color: #c41e3a;
-    border-radius: 8px;
-    text-align: center;
+    height: 70px;
+    width: 100%;
+    margin: -0.5px 0;
+    border-top:1px solid #ff9999;
+    border-bottom:1px solid #ff9999;
+    background-color: #a81919;
     align-items: center;
     justify-content: center;
+}
+
+.meetingButton:hover {
+    background-color: #ffc9c9;
+    color: black;
+}
+
+.meetingInfoTitle {
+    text-align: center;
+    color: black;
+    font-size: 40px;
+}
+
+.sidebarMgmtButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebarMgmtButton {
+    display: inline-flex;
+    height: 70px;
+    width: 38%;
+    margin: 5px auto;
+    border:2px solid #ff9999;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+    background-color: #a81919;
+}
+
+.sidebarMgmtButton:hover {
+    background-color: #ffc9c9;
+    border-color: #75000f;
+    color: black;
 }
