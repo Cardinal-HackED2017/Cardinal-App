@@ -5,6 +5,9 @@ function MeetingView(sidebar, divID, meeting) {
 
     this.load = function() {
         console.log(meeting);
+
+        meeting.times = [1, 2, 3];
+
         d3.select(this.id)
             .append("h1")
             .classed("meetingInfoTitle", true)

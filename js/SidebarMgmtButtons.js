@@ -9,7 +9,7 @@ function SidebarMgmtButtons(sidebar, sidebarMgmtButtonsID) {
 			.append('div')
 			.classed('sidebarMgmtButton', true)
 			.text(function() {
-				return "Create a Meeting";
+				return "Create a Meetup";
 			}).on('click', function() {
 				sidebar.createMeeting();
 			});

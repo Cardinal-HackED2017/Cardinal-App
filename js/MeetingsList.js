@@ -1,31 +1,35 @@
-var meetings = [
-	{"name": "Meeting 1",
-	"description": "this is a cool meeting",
-	"participants": ["Steve", "Hailey"],
-	"times": [1, 2, 3],
-	"id": "1"},
-	{"name": "Test Meeting",
-	"description": "this is another cool meeting",
-	"participants": ["Steve", "George", "Ryan"],
-	"times": [4, 5, 6],
-	"id": "2"},
-	{"name": "Another Meeting",
-	"description": "this is a non-cool meeting",
-	"participants": ["Curtis"],
-	"times": [7, 8, 9],
-	"id": "3"}
-];
-
 function MeetingsList(sidebar, meetingsListID) {
 	this.id = meetingsListID;
 
+	var list = this;
+
+	this.getMeetings = function() {
+		d3.request("http://" + hostandport + "/meetings/")
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .get(function(error, data) {
+				if (error) { console.log(error); }
+	    		else { list.update(data) }
+	        });
+	}
+
 	this.load = function() {
 		this.getMeetings();
+	}
 
-		d3.select(this.id)
+	this.update = function(meetings) {
+		console.log(meetings);
+		if (meetings == null) {
+			return;
+		}
+
+		var meetingSelection = d3.select(this.id)
 			.selectAll('.meetingButton')
-			.data(meetings)
-			.enter()
+			.data(meetings);
+
+		meetingSelection.enter()
 			.append('div')
 			.classed('meetingButton', true)
 			.text(function(d) {
@@ -33,16 +37,12 @@ function MeetingsList(sidebar, meetingsListID) {
 			}).on('click', function(d) {
 				sidebar.showMeeting(d);
 			});
-	}
 
-	this.getMeetings = function() {
-		d3.request("http://" + hostandport + "/meetings/")
-	        .mimeType("application/json")
-	        .header("Authorization", authToken)
-	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
-	        .get(function(error, data) {
-				if (error) { console.log(error); }
-	    		else { console.log(data); }
-	        });
+		meetingSelection.text(function(d) {
+				return d.name;
+			});
+
+		meetingSelection.exit()
+			.remove();
 	}
 }

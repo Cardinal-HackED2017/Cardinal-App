@@ -12,7 +12,7 @@ function Sidebar(sidebarID) {
             .classed('sidebarContext', true)
             .append('h1')
             .classed('meetingInfoTitle', true)
-            .text("My Meetings");
+            .text("My Meetups");
         d3.select(this.id)
             .append('div')
             .classed('sidebarMgmtButtons', true);

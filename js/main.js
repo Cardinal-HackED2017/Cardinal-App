@@ -1,7 +1,14 @@
 var socket;
+var authToken = null;
+var authEmail = null;
+var ready = false;
 
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
+
+window.onload = function() {
+    ready = true;
+}
 
 function handleClientLoad() {
     gapi.load('client:auth2', initClient);
@@ -35,8 +42,10 @@ function handleClientLoad() {
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      authToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
-      authEmail = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
+      authUser = gapi.auth2.getAuthInstance().currentUser.get();
+      authToken = authUser.getAuthResponse().access_token;
+      authEmail = authUser.getBasicProfile().getEmail();
+      sendUserInfo();
     } else {
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
@@ -57,9 +66,26 @@ function handleClientLoad() {
     gapi.auth2.getAuthInstance().signOut();
   }
 
+function sendUserInfo() {
+    var sendJSON = '{"displayName": "' +
+            authUser.getBasicProfile().getName() +
+            '", "email": "' + authEmail + '"}';
+
+    d3.request("http://" + hostandport + "/users/")
+        .header('Content-Type', 'application/json')
+        .header("Authorization", authToken)
+        .header("E-mail", authEmail) // heheheheheheh
+        .header("P-assword", "hunter2")
+        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+        .post(sendJSON, function(error) {
+            if (error) console.log(error);
+            load();
+        });
+}
+
 handleClientLoad();
 
-window.onload = function() {
+function load() {
 
     views = [
         new MainMap('map'),
@@ -70,18 +96,7 @@ window.onload = function() {
         view.load();
     });
 
-    d3.request("http://" + hostandport + "/users/")
-        .mimeType("application/json")
-        .header("Authorization", authToken)
-        .header("E-mail", authEmail) // heheheheheheh
-        .header("P-assword", "hunter2")
-        .response(function(xhr) { return JSON.parse(xhr.responseText); })
-        .get(function(data) {
-            console.log(data);
-        });
-
     // doConnect();
-
 };
 
 function send_message(message) {
