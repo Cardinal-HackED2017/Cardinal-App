@@ -12,6 +12,15 @@ html, body {
     color: white;
 }
 
+#sidebarBlackout {
+    display: none;
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.4;
+}
+
 .sidebarContext {
     width: 100%;
     height: 80%
@@ -150,12 +159,10 @@ textarea {
 }
 
 .submitButton {
-    display: inline-flex;
+    display: inline-block;
     padding: 10px 10px;
     border:2px solid #ff9999;
     border-radius: 4px;
-    align-items: center;
-    justify-content: center;
     color: white;
     background-color: #a81919;
 }

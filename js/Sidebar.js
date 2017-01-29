@@ -1,4 +1,4 @@
-function Sidebar(sidebarID) {
+function Sidebar(sidebarID, mainMap) {
     this.id = sidebarID;
     this.context = this.id + ' .sidebarContext';
     this.menu = this.id + ' .sidebarMgmtButtons';
@@ -17,7 +17,7 @@ function Sidebar(sidebarID) {
             .append('div')
             .classed('sidebarMgmtButtons', true);
 
-        this.list = new MeetingsList(this, this.context);
+        this.list = new MeetingsList(this, this.context, mainMap);
         this.list.load();
 
         this.mgmt = new SidebarMgmtButtons(this, this.id + ' .sidebarMgmtButtons');
@@ -46,7 +46,7 @@ function Sidebar(sidebarID) {
     this.createMeeting = function() {
         this.clearContext();
         this.removeMenu();
-        this.newMeeting = new CreateMeetingView(this, this.id + ' .sidebarContext');
+        this.newMeeting = new CreateMeetingView(this, this.id + ' .sidebarContext', mainMap);
         this.newMeeting.load();
     }
 

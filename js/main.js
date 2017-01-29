@@ -71,6 +71,8 @@ function sendUserInfo() {
             authUser.getBasicProfile().getName() +
             '", "email": "' + authEmail + '"}';
 
+    console.log(authUser.getAuthResponse().access_token);
+
     d3.request("http://" + hostandport + "/users/")
         .header('Content-Type', 'application/json')
         .header("Authorization", authToken)
@@ -87,9 +89,11 @@ handleClientLoad();
 
 function load() {
 
+    var mainMapView = new MainMap('map');
+
     views = [
-        new MainMap('map'),
-        new Sidebar('#sidebar')
+        mainMapView,
+        new Sidebar('#sidebar', mainMapView)
     ];
 
     views.forEach(function(view) {

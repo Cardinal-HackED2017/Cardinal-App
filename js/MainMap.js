@@ -1,12 +1,21 @@
 function MainMap(mainMapID) {
 
     this.id = mainMapID;
+    this.map = null;
 
     this.load = function() {
-        var map = L.map(mainMapID, {center: [53.54, -113.49], zoom: 11, attributionControl: false});
+        this.map = L.map(mainMapID, {center: [53.54, -113.49], zoom: 11, attributionControl: false});
 
-        // L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png').addTo(map);
-        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map);
-        // L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png').addTo(map);
-    }
+        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map);
+
+    };
+
+    this.getClick = function(callback) {
+        var marker = null;
+        this.map.on('click', function(e) {
+            marker = new L.marker(e.latlng, {marker: true}).addTo(this);
+            this.on('click', null);
+            callback(marker);
+        });
+    };
 }

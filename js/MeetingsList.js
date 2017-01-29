@@ -1,4 +1,4 @@
-function MeetingsList(sidebar, meetingsListID) {
+function MeetingsList(sidebar, meetingsListID, mainMap) {
 	this.id = meetingsListID;
 
 	var list = this;
@@ -20,7 +20,6 @@ function MeetingsList(sidebar, meetingsListID) {
 	}
 
 	this.update = function(meetings) {
-		console.log(meetings);
 		if (meetings == null) {
 			return;
 		}
@@ -44,5 +43,22 @@ function MeetingsList(sidebar, meetingsListID) {
 
 		meetingSelection.exit()
 			.remove();
+
+		updateMap(meetings);
+	}
+
+	function updateMap(meetings) {
+		mainMap.map.eachLayer(function(layer) {
+			if (layer.options.marker) {
+				mainMap.map.removeLayer(layer);
+			}
+		});
+
+		meetings.forEach(function(meeting) {
+			new L.marker(
+				L.LatLng(meeting.location.latitude, meeting.location.longitude),
+				{marker: true}
+			).addTo(mainMap.map);
+		});
 	}
 }

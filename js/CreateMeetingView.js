@@ -1,6 +1,7 @@
-function CreateMeetingView(sidebar, createMeetingViewID) {
+function CreateMeetingView(sidebar, createMeetingViewID, mainMap) {
 
     this.id = createMeetingViewID;
+    var marker = null;
 
     this.load = function() {
         d3.select(this.id)
@@ -38,8 +39,14 @@ function CreateMeetingView(sidebar, createMeetingViewID) {
 
         d3.select(".createForm")
             .append("textarea")
-            .attr("id","meetupDescription")
+            .attr("id","meetingDescription")
             .attr("placeholder", "A short description that your invitees will see");
+
+        d3.select(".createForm")
+            .append('div')
+            .classed("submitButton", true)
+            .text('Select a location')
+            .on('click', getMapClick);
 
         d3.select(".createForm")
             .append("p")
@@ -60,7 +67,7 @@ function CreateMeetingView(sidebar, createMeetingViewID) {
             .text("Days start at ")
             .append("input")
             .attr("id","startTime")
-            .attr("type", "time");;
+            .attr("type", "time");
 
         d3.select(".createForm")
             .append("p")
@@ -90,13 +97,53 @@ function CreateMeetingView(sidebar, createMeetingViewID) {
             .append("br");
 
         d3.select(".createForm")
-            .append("input")
-            .attr("type", "submit")
+            .append("div")
             .classed("submitButton", true)
+            .text('Submit')
             .on('click', sendCreateParams);
     }
 
+    function mapClickCallback(returnedMarker) {
+        if (marker) {
+            mainMap.map.removeLayer(marker);
+        }
+        marker = returnedMarker;
+        console.log(marker);
+        d3.select('#sidebarBlackout').style('display', null);
+    }
+
+    function getMapClick() {
+        d3.select('#sidebarBlackout').style('display', 'initial');
+        mainMap.getClick(mapClickCallback);
+    }
+
+    function zeroPad(number) {
+        return ("00" + number).substr(-2,2);
+    }
+
+    function getTimeSpan(minutes) {
+        var millis = minutes * 60 * 1000;
+
+        var days = zeroPad(Math.floor(millis / (1000 * 60 * 60 * 24)));
+        millis -=  days * (1000 * 60 * 60 * 24);
+
+        var hours = zeroPad(Math.floor(millis / (1000 * 60 * 60)));
+        millis -= hours * (1000 * 60 * 60);
+
+        var mins = zeroPad(Math.floor(millis / (1000 * 60)));
+        millis -= mins * (1000 * 60);
+
+        var seconds = zeroPad(Math.floor(millis / (1000)));
+        millis -= seconds * (1000);
+
+        return days + "." + hours + ":" + mins + ":" + seconds;
+    }
+
     function sendCreateParams() {
+        var latLng = {"lat": "", "lng": ""};
+        if (marker) {
+            latLng = marker.getLatLng();
+        }
         // #meetingName, #meetingDescription, #startDate,
         // #endDate, #startTime, #endTime, #meetingLength, #inviteEmails
         var sendJSON = '{"Name": "' + d3.select('#meetingName').node().value +
@@ -105,17 +152,19 @@ function CreateMeetingView(sidebar, createMeetingViewID) {
             '", "EndFence": "' + d3.select('#endDate').node().value +
             '", "dayStart": "' + d3.select('#startTime').node().value +
             '", "dayEnd": "' + d3.select('#endTime').node().value +
-            '", "Length": "' + d3.select('#meetingLength').node().value +
+            '", "Length": "' + getTimeSpan(parseFloat(d3.select('#meetingLength').node().value)) +
+            '", "Longitude": "' + latLng.lng +
+            '", "Longitude": "' + latLng.lat +
             '", "InviteEmails": "' + d3.select('#inviteEmails').node().value + '"}';
 
-        // d3.request("http://" + hostandport + "/meetings/")
-	    //     .header('Content-Type', 'application/json')
-	    //     .header("Authorization", authToken)
-		// 	.header('E-mail', authEmail)
-	    //     .response(function(xhr) { return JSON.parse(xhr.responseText); })
-	    //     .post(sendJSON, function(error) {
-		// 		if (error) { console.log(error); }
-        //         else { sidebar.clear(); sidebar.load(); }
-	    //     });
+        d3.request("http://" + hostandport + "/meetings/")
+	        .header('Content-Type', 'application/json')
+	        .header("Authorization", authToken)
+			.header('E-mail', authEmail)
+	        .response(function(xhr) { return JSON.parse(xhr.responseText); })
+	        .post(sendJSON, function(error, data) {
+				if (error) { console.log(error); }
+                else { sidebar.clear(); sidebar.load(); }
+	        });
     }
 }
