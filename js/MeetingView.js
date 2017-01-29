@@ -1,4 +1,9 @@
-var messages = ["this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf"];
+var messages = ["this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf",
+"this is a message", "hello hello hello", "hi how are you", "blah blah asdnasofjsandf"];
 
 function MeetingView(sidebar, divID, meeting) {
 
@@ -86,6 +91,7 @@ function MeetingView(sidebar, divID, meeting) {
 
         messageBox.append('div')
             .classed('previousMessages', true)
+            .attr('id', 'previousMessages')
             .selectAll('div.message')
             .data(messages)
             .enter()
@@ -93,13 +99,19 @@ function MeetingView(sidebar, divID, meeting) {
             .classed('message', true)
             .text(function(d) { return d; });
 
-        messageBox.append('input')
+        var newMessage = messageBox.append('div')
+            .classed("newMessage", true);
+
+        newMessage.append('input')
             .attr("id","newMessage")
             .attr("type", "text");
 
-        messageBox.append("div")
+        newMessage.append("div")
             .classed("submitButton", true)
             .text('Submit')
             .attr('id','sendMessage');
+
+        var msgsDiv = document.getElementById("previousMessages");
+            msgsDiv.scrollTop = msgsDiv.scrollHeight;
     }
 }
